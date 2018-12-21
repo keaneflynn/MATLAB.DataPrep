@@ -1,0 +1,19 @@
+---
+title: "MATLAB.DataPrep"
+author: "Keane Flynn"
+date: "12/21/2018"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Loading Libraries
+```{r}
+library(readr)
+library(dbplyr)
+library(tidyverse)
+```
+
+#Import Dataset
