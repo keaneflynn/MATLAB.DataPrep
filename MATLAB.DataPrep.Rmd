@@ -17,3 +17,9 @@ library(tidyverse)
 ```
 
 #Import Dataset
+```{r}
+BACI_RoachRun_Control <- 
+  readr::read_csv(file = "Porter_BACI_RoachRun_29June2018_Part3.csv",
+                  col_names = "Objects", "Event", "Timecode", "Time", "X", "Y", "Z", "PLD_Error", "Projection_Error", "Nearest_Camera_Distance", "Screen_Coordinates") 
+BACI_RoachRun_Control
+```
