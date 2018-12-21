@@ -20,6 +20,14 @@ library(tidyverse)
 ```{r}
 BACI_RoachRun_Control <- 
   readr::read_csv(file = "Porter_BACI_RoachRun_29June2018_Part3.csv",
-                  col_names = "Objects", "Event", "Timecode", "Time", "X", "Y", "Z", "PLD_Error", "Projection_Error", "Nearest_Camera_Distance", "Screen_Coordinates") 
+                  skip = 1,
+                  col_names = c("objects", "event", "timecode", "time", "X", "Y", "Z", "pld_error", "projection_error", "nearest_camera_distance", "screen_coordinates")) %>%
+  arrange(objects) %>%
+  filter(!objects == "Surface_Shots 3") %>%
+  filter(!grepl("^Length.*", event)) %>%
+  mutate(subsample = str_extract(objects, "\\d")) %>%
+  mutate(index = str_extract(objects, "\\h\\d{1,2}")) %>%
+  mutate(species = str_extract(objects, "Omykiss|Okisutch")) %>%
+  select(objects, subsample, index, species, time, X, Y, Z)
 BACI_RoachRun_Control
 ```
