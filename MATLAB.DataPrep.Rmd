@@ -35,132 +35,128 @@ BACI_RoachRun_Control <-
 BACI_RoachRun_Control
 ```
 
-#Write.CSV prepping for matlab
+#For Loop
 ```{r}
-index1 <- BACI_RoachRun_Control %>%
-  filter(index == 1) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_1.csv", row.names = FALSE)
-index1
-
-index2 <- BACI_RoachRun_Control %>%
-  filter(index == 2) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_2.csv", row.names = FALSE)
-index2
-
-index4 <- BACI_RoachRun_Control %>%
-  filter(index == 4) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_4.csv", row.names = FALSE)
-index4
-
-index5 <- BACI_RoachRun_Control %>%
-  filter(index == 5) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_5.csv", row.names = FALSE)
-index5
-
-index6 <- BACI_RoachRun_Control %>%
-  filter(index == 6) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_6.csv", row.names = FALSE)
-index6
-
-index7 <- BACI_RoachRun_Control %>%
-  filter(index == 7) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_7.csv", row.names = FALSE)
-index7
-
-index8 <- BACI_RoachRun_Control %>%
-  filter(index == 8) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_8.csv", row.names = FALSE)
-index8
-
-index9 <- BACI_RoachRun_Control %>%
-  filter(index == 9) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_9.csv", row.names = FALSE)
-index9
-
-index10 <- BACI_RoachRun_Control %>%
-  filter(index == 10) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_10.csv", row.names = FALSE)
-index10
-
-index11 <- BACI_RoachRun_Control %>%
-  filter(index == 11) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_11.csv", row.names = FALSE)
-index11
-
-index12 <- BACI_RoachRun_Control %>%
-  filter(index == 12) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_12.csv", row.names = FALSE)
-index12
-
-index13 <- BACI_RoachRun_Control %>%
-  filter(index == 13) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_13.csv", row.names = FALSE)
-index13
-
-index14 <- BACI_RoachRun_Control %>%
-  filter(index == 14) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_14.csv", row.names = FALSE)
-index14
-
-index15 <- BACI_RoachRun_Control %>%
-  filter(index == 15) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_15.csv", row.names = FALSE)
-index15
-
-index16 <- BACI_RoachRun_Control %>%
-  filter(index == 16) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_16.csv", row.names = FALSE)
-index16
-
-index17 <- BACI_RoachRun_Control %>%
-  filter(index == 17) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_17.csv", row.names = FALSE)
-index17
-
-index18 <- BACI_RoachRun_Control %>%
-  filter(index == 18) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_18.csv", row.names = FALSE)
-index18
-
-index19 <- BACI_RoachRun_Control %>%
-  filter(index == 19) %>%
-  select(X, Y, Z) %>%
-  `colnames<-`(NULL) %>%
-  write.csv(file = "BACI_RoachRun_Control_19.csv", row.names = FALSE)
-index19
+for (i in 1:19) {
+	if (i == 3) {
+		next
+	}
+	filename <- paste("BACI_RoachRun_Control_", toString(i), ".csv", sep="")
+	index <- BACI_RoachRun_Control %>%
+		filter(index == i) %>%
+		select(X, Y, Z) %>%
+  	`colnames<-`(NULL) %>%
+		write.csv(file = filename, row.names = FALSE) 
+	  print(filename)
+}
 ```
 
+#Write.CSV prepping for matlab
+```{r}
+#index1 <- BACI_RoachRun_Control %>%
+  #filter(index == 1) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_1.csv", row.names = FALSE)
+
+#index2 <- BACI_RoachRun_Control %>%
+  #filter(index == 2) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_2.csv", row.names = FALSE)
+
+#index4 <- BACI_RoachRun_Control %>%
+  #filter(index == 4) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_4.csv", row.names = FALSE)
+
+#index5 <- BACI_RoachRun_Control %>%
+  #filter(index == 5) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_5.csv", row.names = FALSE)
+
+#index6 <- BACI_RoachRun_Control %>%
+  #filter(index == 6) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_6.csv", row.names = FALSE)
+
+#index7 <- BACI_RoachRun_Control %>%
+  #filter(index == 7) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_7.csv", row.names = FALSE)
+
+#index8 <- BACI_RoachRun_Control %>%
+  #filter(index == 8) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_8.csv", row.names = FALSE)
+
+#index9 <- BACI_RoachRun_Control %>%
+  #filter(index == 9) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_9.csv", row.names = FALSE)
+
+#index10 <- BACI_RoachRun_Control %>%
+  #filter(index == 10) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_10.csv", row.names = FALSE)
+
+#index11 <- BACI_RoachRun_Control %>%
+  #filter(index == 11) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_11.csv", row.names = FALSE)
+
+#index12 <- BACI_RoachRun_Control %>%
+  #filter(index == 12) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_12.csv", row.names = FALSE)
+
+#index13 <- BACI_RoachRun_Control %>%
+  #filter(index == 13) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_13.csv", row.names = FALSE)
+
+#index14 <- BACI_RoachRun_Control %>%
+  #filter(index == 14) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_14.csv", row.names = FALSE)
+#index15 <- BACI_RoachRun_Control %>%
+  #filter(index == 15) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_15.csv", row.names = FALSE)
+
+#index16 <- BACI_RoachRun_Control %>%
+  #filter(index == 16) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_16.csv", row.names = FALSE)
+
+#index17 <- BACI_RoachRun_Control %>%
+  #filter(index == 17) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_17.csv", row.names = FALSE)
+
+#index18 <- BACI_RoachRun_Control %>%
+  #filter(index == 18) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_18.csv", row.names = FALSE)
+
+#index19 <- BACI_RoachRun_Control %>%
+  #filter(index == 19) %>%
+  #select(X, Y, Z) %>%
+  #`colnames<-`(NULL) %>%
+  #write.csv(file = "BACI_RoachRun_Control_19.csv", row.names = FALSE)
+```
