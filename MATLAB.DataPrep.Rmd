@@ -16,10 +16,10 @@ library(dbplyr)
 library(tidyverse)
 ```
 
-#Import Dataset
+#Import Roach Run Pre-Augmentation Dataset 
 ```{r}
 BACI_RoachRun_Control <- 
-  readr::read_csv(file = "Porter_BACI_RoachRun_29June2018_Part3.csv",
+  readr::read_csv(file = "VidSync_Files/Porter_BACI_RoachRun_29June2018_Part3.csv",
                   skip = 1,
                   col_names = c("objects", "event", "timecode", "time", "X", "Y", "Z", "pld_error", "projection_error", "nearest_camera_distance", "screen_coordinates")) %>%
   arrange(objects) %>%
@@ -35,10 +35,47 @@ BACI_RoachRun_Control <-
 BACI_RoachRun_Control
 ```
 
-#For Loop
+##For Loop Roach Run Pre-Augmentation
 ```{r}
 for (i in 1:19) {
 	if (i == 3) {
+		next
+	}
+	filename <- paste("BACI_RoachRun_Control_", toString(i), ".csv", sep="")
+	index <- BACI_RoachRun_Control %>%
+		filter(index == i) %>%
+		select(X, Y, Z) %>%
+  	`colnames<-`(NULL) %>%
+		write.csv(file = filename, row.names = FALSE) 
+	  print(filename)
+}
+```
+
+#Import Roach Run Augmentation Dataset 
+```{r}
+BACI_RoachRun_Control <- 
+  readr::read_csv(file = "VidSync_Files/Porter_BACI_RoachRun_5July2018_Part1.csv",
+                  skip = 1,
+                  col_names = c("objects", "event", "timecode", "time", "X", "Y", "Z", "pld_error", "projection_error", "nearest_camera_distance", "screen_coordinates")) %>%
+  arrange(objects) %>%
+  filter(!grepl("Surface_Shots.*", objects)) %>%
+  filter(!grepl("^Length.*", event)) %>%
+  mutate(subsample = str_extract(objects, "\\d")) %>%
+  mutate(index = str_extract(objects, "\\h\\d{1,2}")) %>%
+  mutate(species = str_extract(objects, "Omykiss|Okisutch")) %>%
+  filter(!species == "NA") %>%
+  transform(index = as.numeric(index),
+            subsample = as.numeric(subsample)) %>%
+  arrange(subsample, index, time) %>%
+  select(index, X, Y, Z) %>%
+  arrange(index)
+BACI_RoachRun_Control
+```
+
+##For Loop Roach Run Augmentation
+```{r}
+for (i in 1:33) {
+	if (i == 3, 13, 20, 26, 31) {
 		next
 	}
 	filename <- paste("BACI_RoachRun_Control_", toString(i), ".csv", sep="")
