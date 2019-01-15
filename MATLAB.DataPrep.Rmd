@@ -53,7 +53,7 @@ for (i in 1:19) {
 
 #Import Roach Run Augmentation Dataset 
 ```{r}
-BACI_RoachRun_Control <- 
+BACI_RoachRun_Manipulated <- 
   readr::read_csv(file = "VidSync_Files/Porter_BACI_RoachRun_5July2018_Part1.csv",
                   skip = 1,
                   col_names = c("objects", "event", "timecode", "time", "X", "Y", "Z", "pld_error", "projection_error", "nearest_camera_distance", "screen_coordinates")) %>%
@@ -69,7 +69,7 @@ BACI_RoachRun_Control <-
   arrange(subsample, index, time) %>%
   select(index, X, Y, Z) %>%
   arrange(index)
-BACI_RoachRun_Control
+BACI_RoachRun_Manipulated
 ```
 
 ##For Loop Roach Run Augmentation
@@ -91,7 +91,7 @@ for (i in 1:33) {
     next
   }
 	filename <- paste("BACI_RoachRun_Manipulated_", toString(i), ".csv", sep="")
-	index <- BACI_RoachRun_Control %>%
+	index <- BACI_RoachRun_Manipulated %>%
 		filter(index == i) %>%
 		select(X, Y, Z) %>%
   	`colnames<-`(NULL) %>%
