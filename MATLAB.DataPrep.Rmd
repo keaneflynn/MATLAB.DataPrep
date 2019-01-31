@@ -105,7 +105,8 @@ for (i in 1:33) {
 BACI_Golfball_Control <-
   readr::read_csv(file = "VidSync_Files/Porter_BACI_GolfBall_30June2018_Part3.csv",
                     skip = 1,
-                    col_names = c("objects", "event", "timecode", "time", "X", "Y", "Z", "pld_error", "projection_error", "nearest_camera_distance", "screen_coordinates")) %>%
+                    col_names = c("objects", "event", "timecode", "time", "X", "Y", "Z", "pld_error", "projection_error", "nearest_camera_distance", "screen_coordinates"),
+                    col_types = "cccdddddddd") %>%
     arrange(objects) %>%
     filter(!grepl("Surface_Shots.*", objects)) %>%
     filter(!grepl("^Length.*", event)) %>%
