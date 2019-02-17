@@ -170,6 +170,41 @@ for (i in 1:6) {
 }
 ```
 
+#Import Half Tire Pre-Augmentation Dataset
+```{r}
+BACI_HalfTire_Control <-
+  readr::read_csv(file = "VidSync_Files/Porter_BACI_HalfTire_29June2018_Part2.csv",
+                    skip = 1,
+                    col_names = c("objects", "event", "timecode", "time", "X", "Y", "Z", "pld_error", "projection_error", "nearest_camera_distance", "screen_coordinates"),
+                    col_types = "cccdddddddd") %>%
+    arrange(objects) %>%
+    filter(!grepl("Surface_Shots.*", objects)) %>%
+    filter(!grepl("^Length.*", event)) %>%
+    mutate(subsample = str_extract(objects, "\\d")) %>%
+    mutate(index = str_extract(objects, "\\h\\d{1,2}")) %>%
+    mutate(species = str_extract(objects, "Omykiss|Okisutch")) %>%
+    filter(!species == "NA") %>%
+    transform(index = as.numeric(index),
+              subsample = as.numeric(subsample)) %>%
+    arrange(subsample, index, time) %>%
+    select(subsample, index, X, Y, Z) %>%
+    arrange(index)
+BACI_HalfTire_Control
+```
+
+##For Loop HalfTire PreAugmentation
+```{r}
+for (i in 1:8) {
+	filename <- paste("BACI_HalfTire_Control_", toString(i), ".csv", sep="")
+	index <- BACI_HalfTire_Control %>%
+		filter(index == i) %>%
+		select(X, Y, Z) %>%
+  	`colnames<-`(NULL) %>%
+		write.csv(file = filename, row.names = FALSE) 
+	  print(filename)
+}
+```
+
 #Write.CSV prepping for matlab
 ```{r}
 #index1 <- BACI_RoachRun_Control %>%
