@@ -157,6 +157,19 @@ BACI_Golfball_Manipulated <-
 BACI_Golfball_Manipulated
 ```
 
+##For Loop Golfball PostAugmentation
+```{r}
+for (i in 1:6) {
+	filename <- paste("BACI_Golfball_Manipulated_", toString(i), ".csv", sep="")
+	index <- BACI_Golfball_Manipulated %>%
+		filter(index == i) %>%
+		select(X, Y, Z) %>%
+  	`colnames<-`(NULL) %>%
+		write.csv(file = filename, row.names = FALSE) 
+	  print(filename)
+}
+```
+
 #Write.CSV prepping for matlab
 ```{r}
 #index1 <- BACI_RoachRun_Control %>%
